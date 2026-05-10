@@ -1,6 +1,6 @@
 export interface BeTheoryTopic {
   id: string;
-  category: string;
+  category: 'Fundamental Backend' | 'Basic Logic Backend' | 'Spring Boot' | 'DevOps' | 'Dockerize';
   title: string;
   description: string;
   fullTheory: string;
@@ -8,399 +8,1215 @@ export interface BeTheoryTopic {
 }
 
 export const beTheoryData: BeTheoryTopic[] = [
-  // SECTION 1: OOP PROGRAMMING - THE CORE OF BACKEND (1-12)
+  // SECTION 1: FUNDAMENTAL BACKEND (1-30)
   {
     id: 'BE-001',
-    category: 'OOP Programming',
-    title: 'Objects & Classes',
-    description: 'Ciri-ciri dan cetak biru entitas dalam perangkat lunak.',
-    fullTheory: 'Class adalah blueprint atau template yang mendefinisikan atribut (data) dan behavior (metode). Object adalah instansi nyata dari class tersebut yang hidup di memori. Dalam arsitektur backend, class digunakan untuk merepresentasikan entitas bisnis seperti User, Order, atau Payment.',
-    codeSnippet: '// Definisi Class\npublic class User {\n  private String name;\n  public void login() { ... }\n}\n\n// Instansiasi Object\nUser customer = new User();'
+    category: 'Fundamental Backend',
+    title: 'Client-Server Architecture',
+    description: 'Pilar utama komunikasi web modern.',
+    fullTheory: 'Client (browser/mobile) mengirim request ke Server (backend). Server memproses logika dan database, lalu mengirim response (JSON/HTML). Backend bertugas menjaga keamanan dan integritas data.',
+    codeSnippet: 'Request -> Server -> Response'
   },
   {
     id: 'BE-002',
-    category: 'OOP Programming',
-    title: 'Encapsulation: Data Shielding',
-    description: 'Menyembunyikan kompleksitas dan melindungi integritas data.',
-    fullTheory: 'Encapsulation (Pembungkusan) adalah mekanisme menyembunyikan detail internal class menggunakan akses modifier (private). Akses hanya diberikan melalui metode publik (Getter/Setter). Ini penting untuk mencegah manipulasi data ilegal dari luar yang bisa merusak state sistem.',
-    codeSnippet: 'private double balance;\n\npublic void deposit(double amount) {\n  if (amount > 0) this.balance += amount;\n}'
+    category: 'Fundamental Backend',
+    title: 'HTTP Methods',
+    description: 'GET, POST, PUT, DELETE.',
+    fullTheory: 'Metode HTTP menentukan aksi yang dilakukan pada resource. GET untuk membaca, POST untuk membuat, PUT untuk memperbarui, dan DELETE untuk menghapus.',
+    codeSnippet: 'GET /api/users\nPOST /api/users'
   },
   {
     id: 'BE-003',
-    category: 'OOP Programming',
-    title: 'Inheritance: Code Reusability',
-    description: 'Mewarisi sifat dan perilaku antar class secara hierarkis.',
-    fullTheory: 'Inheritance memungkinkan sebuah class (Child) mewarisi atribut dan metode dari class lain (Parent). Ini membantu mengurangi duplikasi kode. Misalnya, class Employee bisa mewarisi sifat dasar ke Manager atau Developer.',
-    codeSnippet: 'public class Manager extends Employee {\n  private List<Employee> teamMembers;\n}'
+    category: 'Fundamental Backend',
+    title: 'RESTful API Principles',
+    description: 'Standar desain API kelas dunia.',
+    fullTheory: 'REST harus Stateless, menggunakan URL yang konsisten, dan memisahkan urusan antara client dan server secara total.',
+    codeSnippet: 'GET /api/v1/orders'
   },
   {
     id: 'BE-004',
-    category: 'OOP Programming',
-    title: 'Polymorphism (Many Forms)',
-    description: 'Satu interface untuk banyak implementasi atau perilaku berbeda.',
-    fullTheory: 'Polymorphism memungkinkan sebuah metode memiliki banyak bentuk. Terbagi menjadi: \n1. Overloading (Metode dengan nama sama tapi parameter beda di class yang sama).\n2. Overriding (Mengganti implementasi metode parent di class child agar sesuai konteks).',
-    codeSnippet: '@Override\npublic void processPayment() {\n  // Logika khusus kartu kredit\n}'
+    category: 'Fundamental Backend',
+    title: 'Authentication',
+    description: 'Mengetahui identitas pengguna.',
+    fullTheory: 'Proses memverifikasi identitas pengguna menggunakan kredensial seperti username dan password.',
+    codeSnippet: 'login(user, pass);'
   },
   {
     id: 'BE-005',
-    category: 'OOP Programming',
-    title: 'Abstraction: Simplifying Reality',
-    description: 'Hanya menampilkan fungsionalitas penting tanpa detail rumit.',
-    fullTheory: 'Abstraction menyembunyikan detail implementasi yang kompleks. Pengguna objek hanya perlu tahu "apa yang bisa dilakukan" (Interface/Abstract Class) tanpa peduli "bagaimana cara kerjanya" di balik layar.',
-    codeSnippet: 'abstract class PaymentMethod {\n  abstract void pay(double amount);\n}'
+    category: 'Fundamental Backend',
+    title: 'Authorization',
+    description: 'Mengetahui hak akses pengguna.',
+    fullTheory: 'Memeriksa apakah pengguna yang sudah login diizinkan melakukan aksi tertentu berdasarkan Role (Admin/User).',
+    codeSnippet: 'if (user.isAdmin) { ... }'
   },
   {
     id: 'BE-006',
-    category: 'OOP Programming',
-    title: 'Interfaces: The System Contract',
-    description: 'Sekumpulan standar metode yang wajib dijalankan oleh class.',
-    fullTheory: 'Interface bertindak sebagai kontrak. Class yang mengimplementasikan interface wajib menulis ulang semua metode di dalamnya. Sangat berguna untuk decoupling (pelepasan ketergantungan) antar modul di aplikasi backend besar.',
-    codeSnippet: 'public interface Logger {\n  void writeLog(String message);\n}'
+    category: 'Fundamental Backend',
+    title: 'JSON Data Format',
+    description: 'Bahasa universal pertukaran data.',
+    fullTheory: 'Format data ringan berbasis teks yang mudah dibaca oleh manusia dan mesin untuk pertukaran data API.',
+    codeSnippet: '{ "status": "success" }'
   },
   {
     id: 'BE-007',
-    category: 'OOP Programming',
-    title: 'Composition: The "Has-A" Relationship',
-    description: 'Membangun objek kompleks dengan menggabungkan objek-objek lain.',
-    fullTheory: 'Daripada mewarisi segalanya (Inheritance), Komposisi menggunakan objek lain sebagai variabel. "Mobil MEMILIKI Mesin" (Has-A) lebih fleksibel daripada "Mobil ADALAH Mesin" (Is-A). Ini memudahkan swapping komponen saat runtime.',
-    codeSnippet: 'public class Car {\n  private Engine engine; // Komposisi\n}'
+    category: 'Fundamental Backend',
+    title: 'Statelessness',
+    description: 'Server tidak menyimpan session.',
+    fullTheory: 'Tiap request harus membawa semua informasi yang dibutuhkan agar server tidak perlu mengingat status client.',
+    codeSnippet: 'Auth: Bearer <TOKEN>'
   },
   {
     id: 'BE-008',
-    category: 'OOP Programming',
-    title: 'SOLID: Single Responsibility (S)',
-    description: 'Satu class hanya boleh memiliki satu alasan untuk berubah.',
-    fullTheory: 'Setiap modul atau class harus bertanggung jawab atas satu fungsionalitas saja. Jika sebuah class User bertugas menyimpan data ke DB, memvalidasi email, DAN mengirim notifikasi, maka class tersebut melanggar prinsip S dan akan sulit di-maintenance.',
-    codeSnippet: '// Bagus: Pisahkan UserService, EmailService, dan UserRepository'
+    category: 'Fundamental Backend',
+    title: 'CORS Security',
+    description: 'Akses domain yang aman.',
+    fullTheory: 'Mencegah script berbahaya dari domain luar untuk mengakses API Anda tanpa izin resmi dari server.',
+    codeSnippet: 'Allow-Origin: frontend.com'
   },
   {
     id: 'BE-009',
-    category: 'OOP Programming',
-    title: 'SOLID: Open/Closed (O)',
-    description: 'Terbuka untuk perluasan, tertutup untuk perubahan kode asli.',
-    fullTheory: 'Anda harus bisa menambah fitur baru (extension) tanpa harus mengubah kode yang sudah ada (modification). Caranya adalah menggunakan Abstraction dan Interface sehingga fungsionalitas baru bisa ditambahkan sebagai class baru.',
-    codeSnippet: '// Tambah DiskountBaru sebagai class baru, bukan ubah logic if-else lama.'
+    category: 'Fundamental Backend',
+    title: 'HTTP Status Codes',
+    description: 'Pesan hasil dari server.',
+    fullTheory: 'Kode 2xx berarti sukses, 4xx kesalahan klien (Input salah), 5xx kesalahan server (Crash).',
+    codeSnippet: 'Res: 400 Bad Request'
   },
   {
     id: 'BE-010',
-    category: 'OOP Programming',
-    title: 'SOLID: Dependency Inversion (D)',
-    description: 'Hanya bergantung pada abstraksi, bukan pada implementasi konkret.',
-    fullTheory: 'Modul tingkat tinggi tidak boleh bergantung pada modul tingkat rendah. Keduanya harus bergantung pada Interface. Ini adalah kunci agar kode backend bisa diuji (testable) menggunakan Mocking.',
-    codeSnippet: 'public OrderService(IPaymentProcessor processor) {\n  this.processor = processor; // Inject via Interface\n}'
+    category: 'Fundamental Backend',
+    title: 'Web Server vs App Server',
+    description: 'Nginx vs Tomcat/Node.',
+    fullTheory: 'Web server melayani file statis, App server menjalankan logika program dinamis yang kompleks.',
+    codeSnippet: 'Nginx -> Tomcat'
   },
   {
     id: 'BE-011',
-    category: 'OOP Programming',
-    title: 'Design Pattern: Singleton',
-    description: 'Menjamin hanya ada satu instansi objek di seluruh aplikasi.',
-    fullTheory: 'Sering digunakan untuk manajemen resource bersama seperti Database Connection Pool atau Configuration Manager. Tujuannya menghemat memori dan menjaga konsistensi state global.',
-    codeSnippet: 'public static Database getInstance() {\n  if (instance == null) instance = new Database();\n  return instance;\n}'
+    category: 'Fundamental Backend',
+    title: 'Content-Type Header',
+    description: 'Mendefinisikan format data.',
+    fullTheory: 'Memberitahu server atau klien bahwa data yang dikirim adalah JSON, XML, atau Form-Data.',
+    codeSnippet: 'Content-Type: application/json'
   },
   {
     id: 'BE-012',
-    category: 'OOP Programming',
-    title: 'Design Pattern: Observer',
-    description: 'Mekanisme pemberitahuan perubahan state ke banyak pihak otomatis.',
-    fullTheory: 'Sangat berguna dalam sistem Event-Driven. Saat sebuah Order berstatus "Paid", berbagai layanan (Shipping, Email, Inventory) otomatis bereaksi karena mereka "berlangganan" ke event tersebut.',
-    codeSnippet: 'subject.notifyObservers("Order_Success");'
+    category: 'Fundamental Backend',
+    title: 'Request Body vs Query',
+    description: 'Cara mengirim paket data.',
+    fullTheory: 'Query string digunakan untuk filter di URL, Request Body digunakan untuk kirim data besar (seperti form pendaftaran).',
+    codeSnippet: 'POST ... body: { name: "x" }'
   },
-
-  // SECTION 2: ORM & DATABASE ARCHITECTURE (13-25)
   {
     id: 'BE-013',
-    category: 'ORM & Database',
-    title: 'ORM: Object Relational Mapping',
-    description: 'Menjembatani dunia Objek (OOP) dengan dunia Tabel (SQL).',
-    fullTheory: 'ORM (Hibernate @ Java, Entity Framework @ .NET, Sequelize @ Node) memungkinkan developer query database menggunakan bahasa pemrograman favorit tanpa harus menulis SQL mentah secara terus-menerus. Ia memetakan entitas class langsung ke tabel database.',
-    codeSnippet: '@Entity\npublic class User { ... }\n// Simpan data tanpa SQL INSERT\nrepository.save(myUser);'
+    category: 'Fundamental Backend',
+    title: 'API Versioning',
+    description: 'v1, v2, v3 strategi.',
+    fullTheory: 'Memastikan perubahan kode tidak merusak aplikasi lama dengan memisahkan versi di URL atau header.',
+    codeSnippet: 'GET /api/v1/users'
   },
   {
     id: 'BE-014',
-    category: 'ORM & Database',
-    title: 'Database Relations: 1:1, 1:N, N:N',
-    description: 'Memahami hubungan kompleks antar entitas data.',
-    fullTheory: '1. One-to-One: User memiliki satu profil.\n2. One-to-Many: User memiliki banyak postingan.\n3. Many-to-Many: Siswa mengambil banyak kursus, dan kursus diambil banyak siswa (memerlukan Tabel Perantara/Pivot).',
-    codeSnippet: '@OneToMany(mappedBy = "user")\nprivate List<Post> posts;'
+    category: 'Fundamental Backend',
+    title: 'Idempotency',
+    description: 'Request berulang, hasil tetap sama.',
+    fullTheory: 'Prinsip keamanan di mana jika request dikirim berkali-kali (karena lag), pengaruhnya di server tetap satu kali saja.',
+    codeSnippet: 'PUT is idempotent'
   },
   {
     id: 'BE-015',
-    category: 'ORM & Database',
-    title: 'Database Transactions (ACID)',
-    description: 'Menjamin integritas data melalui eksekusi "Semua atau Tidak Sama Sekali".',
-    fullTheory: 'Transaksi memastikan sekumpulan perintah DB berhasil semua atau gagal semua (Rollback). \n- Atomic: Utuh.\n- Consistent: Valid.\n- Isolated: Terpisah.\n- Durable: Permanen (setelah commit).',
-    codeSnippet: '@Transactional\npublic void transferMoney() {\n  withdraw(a);\n  deposit(b);\n}'
+    category: 'Fundamental Backend',
+    title: 'Path Variables',
+    description: 'Identitas di dalam URL.',
+    fullTheory: 'Menggunakan bagian dari URL sebagai variabel untuk mencari resource tertentu secara spesifik.',
+    codeSnippet: 'GET /users/{id}'
   },
   {
     id: 'BE-016',
-    category: 'ORM & Database',
-    title: 'Schema Generation: Code First',
-    description: 'Membuat struktur tabel database langsung dari kode aplikasi.',
-    fullTheory: 'Dengan pendekatan Code-First, backend engineer fokus pada desain objek. ORM akan mendeteksi perubahan properti dalam class dan secara otomatis melakukan Alter/Create pada database agar sinkron.',
-    codeSnippet: '// hibernate.hbm2ddl.auto = update'
+    category: 'Fundamental Backend',
+    title: 'HATEOAS',
+    description: 'API yang bisa dieksplorasi.',
+    fullTheory: 'Memberikan link navigasi dalam respon JSON agar klien tahu apa langkah selanjutnya (Next actions).',
+    codeSnippet: '"_links": { "self": "/u/1" }'
   },
   {
     id: 'BE-017',
-    category: 'ORM & Database',
-    title: 'Database Indexing',
-    description: 'Mempercepat pencarian data besar secara drastis.',
-    fullTheory: 'Indexing memberikan "peta jalan" bagi database untuk menemukan record tanpa harus membaca seluruh baris tabel (Full Table Scan). Ini kunci performa saat data mencapai jutaan baris.',
-    codeSnippet: 'CREATE INDEX idx_email ON users(email);'
+    category: 'Fundamental Backend',
+    title: 'Reverse Proxy',
+    description: 'Tameng di depan server.',
+    fullTheory: 'Bertindak sebagai perantara untuk menyembunyikan alamat asli server backend demi keamanan.',
+    codeSnippet: 'Browser -> Nginx -> Server'
   },
-
-  // SECTION 3: API ENGINEERING & VALIDATION (26-40)
   {
     id: 'BE-018',
-    category: 'API Engineering',
-    title: 'REST API & JSON',
-    description: 'Standar komunikasi hightly-scalable untuk sistem modern.',
-    fullTheory: 'REST (Representational State Transfer) menggunakan metode HTTP (GET, POST, PUT, DELETE) untuk memanipulasi resources. JSON digunakan sebagai bahasa universal pertukaran data karena ringan dan mudah dibaca manusia.',
-    codeSnippet: 'GET /api/v1/orders/789\nHost: my-app.com\nAccept: application/json'
+    category: 'Fundamental Backend',
+    title: 'Load Balancing',
+    description: 'Pembagi beban trafik.',
+    fullTheory: 'Membagikan ribuan request user ke beberapa server agar tidak ada satu server yang kepanasan (Crash).',
+    codeSnippet: 'S1, S2, S3 <- LB'
   },
   {
     id: 'BE-019',
-    category: 'API Engineering',
-    title: 'HATEOAS: Navigable APIs',
-    description: 'Memberikan link navigasi otomatis di dalam respon API.',
-    fullTheory: 'HATEOAS (Hypermedia as the Engine of Application State) membuat API menjadi "Self-Documenting". Client tidak perlu menghafal URL, cukup ikuti link yang ada di respon JSON.',
-    codeSnippet: '"links": [\n  { "rel": "self", "href": "/orders/1" },\n  { "rel": "cancel", "href": "/orders/1/cancel" }\n]'
+    category: 'Fundamental Backend',
+    title: 'HTTPS (SSL/TLS)',
+    description: 'Enkripsi jalur data.',
+    fullTheory: 'Mengacak data saat terkirim di internet agar tidak bisa disadap oleh peretas di tengah jalan.',
+    codeSnippet: 'Server: 443 (Tersertifikasi)'
   },
   {
     id: 'BE-020',
-    category: 'API Engineering',
-    title: 'API Versioning',
-    description: 'Menjaga kompatibilitas sistem saat terjadi perubahan besar.',
-    fullTheory: 'Saat ada perubahan "Breaking Changes", gunakan versioning agar aplikas lama tidak rusak. Bisa dilakukan lewat URI (/v1/), Header parameter, atau Query string.',
-    codeSnippet: '// /api/v1/user (Lama)\n// /api/v2/user (Baru dengan skema berbeda)'
+    category: 'Fundamental Backend',
+    title: 'SQL vs NoSQL',
+    description: 'Tabel vs Dokumen.',
+    fullTheory: 'SQL untuk data terstruktur dan relasional. NoSQL (MongoDB) untuk data fleksibel dan skalabilitas tinggi.',
+    codeSnippet: 'SELECT vs db.find()'
   },
   {
     id: 'BE-021',
-    category: 'Data Validation',
-    title: 'Backend Validation: Beyond UI',
-    description: 'Benteng terakhir pertahanan integritas data.',
-    fullTheory: 'Jangan pernah percaya input dari klien (Frontend). Selalu validasi ulang di backend menggunakan Form Helpers atau JSR-303 (Bean Validation) untuk memastikan tipe data, rentang angka, dan format email sudah benar.',
-    codeSnippet: '@NotNull\n@Size(min = 8, message = "Password terlalu pendek")\nprivate String password;'
+    category: 'Fundamental Backend',
+    title: 'TTL (Time To Live)',
+    description: 'Durasi hidup data cache.',
+    fullTheory: 'Menentukan berapa lama data disimpan di memori sebelum dianggap kadaluarsa dan harus diambil ulang.',
+    codeSnippet: 'expire_after: 3600s'
   },
   {
     id: 'BE-022',
-    category: 'Data Validation',
-    title: 'Validasi JSON Body Request',
-    description: 'Memeriksa struktur objek yang dikirim via POST/PUT.',
-    fullTheory: 'Memastikan payload JSON yang masuk sesuai dengan skema DTO (Data Transfer Object). Jika ada field wajib yang kurang, server harus segera merespon dengan Error 400 Bad Request.',
-    codeSnippet: 'public ResponseEntity create(@Valid @RequestBody UserDTO user) { ... }'
+    category: 'Fundamental Backend',
+    title: 'Message Queues',
+    description: 'Antrian perintah asinkron.',
+    fullTheory: 'Menyimpan perintah (seperti kirim email) di antrian agar server bisa balas user dengan cepat.',
+    codeSnippet: 'App -> Queue -> Worker'
   },
-
-  // SECTION 4: SECURITY & AUTHENTICATION (41-55)
   {
     id: 'BE-023',
-    category: 'Security & Auth',
-    title: 'Authentication Filters',
-    description: 'Mencegat setiap request untuk memeriksa identitas user.',
-    fullTheory: 'Filter atau Middleware berada di depan layer controller. Ia bertugas memeriksa Token atau Session sebelum request diteruskan ke logika bisnis. Jika gagal, request ditolak dengan Error 401 Unauthorized.',
-    codeSnippet: 'public void doFilter(Request req, Response res) {\n  if (!isValidToken(req)) throw Unauthorized();\n}'
+    category: 'Fundamental Backend',
+    title: 'Webhooks',
+    description: 'Notifikasi otomatis antar server.',
+    fullTheory: 'Server A mengirim data ke Server B segera setelah ada peristiwa terjadi tanpa perlu Server B bertanya.',
+    codeSnippet: 'HTTP POST callback'
   },
   {
     id: 'BE-024',
-    category: 'Security & Auth',
-    title: 'JWT (JSON Web Token)',
-    description: 'Token terenkripsi untuk autentikasi stateless.',
-    fullTheory: 'JWT terdiri dari Header, Payload, dan Signature. Server hanya perlu memverifikasi signature tanpa harus menyimpan session di database atau memori, sehingga aplikasi sangat scalable.',
-    codeSnippet: 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+    category: 'Fundamental Backend',
+    title: 'OpenAPI / Swagger',
+    description: 'Dokumentasi interaktif.',
+    fullTheory: 'Membuat halaman web otomatis agar developer lain bisa mencoba API Anda secara langsung dan mudah.',
+    codeSnippet: '@Schema(description = "User")'
   },
   {
     id: 'BE-025',
-    category: 'Security & Auth',
-    title: 'OAuth2 & OpenID Connect',
-    description: 'Delegasi akses dan Identity Layer tingkat lanjut.',
-    fullTheory: 'OAuth2 digunakan untuk memberikan aplikasi pihak ketiga izin akses ke data kita tanpa memberikan password asli kita (misal: "Login with Google"). OpenID Connect menambah layer identitas di atas OAuth2.',
-    codeSnippet: '// Flow: Authorization Code Grant'
+    category: 'Fundamental Backend',
+    title: 'Rate Limiting',
+    description: 'Membatasi jumlah request.',
+    fullTheory: 'Mencegah hacker membombardir server dengan jutaan request per detik agar server tetap stabil.',
+    codeSnippet: 'max_request: 100/min'
   },
   {
     id: 'BE-026',
-    category: 'Security & Auth',
-    title: 'Cryptography: Bcrypt & Slow Hashing',
-    description: 'Cara paling aman menyimpan password user.',
-    fullTheory: 'Gunakan Bcrypt atau Argon2. Algoritma ini sengaja dibuat lambat (Slow Hash) dan menggunakan salt unik untuk setiap password agar tahan terhadap serangan Brute Force dan Rainbow Tables.',
-    codeSnippet: 'String hashed = BCrypt.hashpw(plainText, BCrypt.gensalt(12));'
+    category: 'Fundamental Backend',
+    title: 'Cookies vs Tokens',
+    description: 'Menyimpan status login.',
+    fullTheory: 'Cookies disimpan di browser, Token (JWT) dikelola oleh aplikasi. JWT lebih disukai untuk sistem yang skalabel.',
+    codeSnippet: 'Bearer eyJhbG...'
   },
   {
     id: 'BE-027',
-    category: 'Security & Auth',
-    title: 'TLS/SSL & HTTPS',
-    description: 'Mengamankan jalur komunikasi data antar jaringan.',
-    fullTheory: 'Menggunakan Transport Layer Security (TLS) untuk mengenkripsi data saat transit guna mencegah serangan Man-in-the-Middle (MitM) yang mencoba mencuri data sensitif di tengah jalan.',
-    codeSnippet: '// Menyalakan HTTPS di port 443'
+    category: 'Fundamental Backend',
+    title: 'XSS Prevention',
+    description: 'Cegah injeksi skrip.',
+    fullTheory: 'Membersihkan input user agar tidak berisi kode JavaScript jahat yang bisa mencuri data pengguna lain.',
+    codeSnippet: 'sanitize(userInput)'
   },
-
-  // SECTION 5: INFRASTRUCTURE & SCALING (56-75)
   {
     id: 'BE-028',
-    category: 'Infrastructure',
-    title: 'Docker: Containerization',
-    description: 'Membungkus aplikasi dengan lingkup isolasi sempurna.',
-    fullTheory: 'Docker memastikan aplikasi berjalan SAMA persis di komputer lokal, server testing, dan production. Ia membungkus kode, OS, dan dependensi menjadi satu "Image" yang ringan.',
-    codeSnippet: 'FROM node:18\nWORKDIR /app\nRUN npm install\nCMD ["npm", "start"]'
+    category: 'Fundamental Backend',
+    title: 'CSRF Protection',
+    description: 'Cegah request palsu.',
+    fullTheory: 'Menambahkan kode unik (Token) di setiap form agar server tahu request datang dari situs asli, bukan jebakan.',
+    codeSnippet: '_csrf_token = uuid'
   },
   {
     id: 'BE-029',
-    category: 'Infrastructure',
-    title: 'Caching with Redis',
-    description: 'Mempercepat akses data dengan menyimpan hasil query di RAM.',
-    fullTheory: 'Redis adalah penyimpanan data in-memory super cepat. Digunakan untuk menyimpan data yang jarang berubah tapi sering diakses (seperti detail produk atau session user) untuk mengurangi beban ke database SQL.',
-    codeSnippet: 'cache.set("user_123", userData, "EX", 3600);'
+    category: 'Fundamental Backend',
+    title: 'SQL Injection',
+    description: 'Cegah manipulasi database.',
+    fullTheory: 'Jangan pernah gabung teks user ke SQL. Gunakan Parameterized Queries untuk menjamin keamanan database.',
+    codeSnippet: 'WHERE id = ? (Safe)'
   },
   {
     id: 'BE-030',
-    category: 'Infrastructure',
-    title: 'Message Queues: Kafka & RabbitMQ',
-    description: 'Mengelola komunikasi asinkron antar layanan (Decoupling).',
-    fullTheory: 'Jika ada proses berat (misal: kirim 10,000 email), kirimkan pesannya ke Broker/Antrian. Biarkan layanan lain memprosesnya di latar belakang sehingga user tidak perlu menunggu loading lama.',
-    codeSnippet: 'rabbitTemplate.convertAndSend("email_queue", emailData);'
+    category: 'Fundamental Backend',
+    title: 'Global Exception Handler',
+    description: 'Pusat penanganan error.',
+    fullTheory: 'Menangkap semua error sistem di satu tempat agar user selalu terima pesan yang sopan, bukan kode error mentah.',
+    codeSnippet: '@ControllerAdvice'
   },
+
+  // SECTION 2: BASIC LOGIC BACKEND (31-60)
   {
     id: 'BE-031',
-    category: 'Infrastructure',
-    title: 'Microservices Architecture',
-    description: 'Membagi satu aplikasi besar menjadi belasan layanan kecil mandiri.',
-    fullTheory: 'Setiap layanan (User, Order, Payment) memiliki database sendiri-sendiri. Jika satu layanan mati, layanan lain tetap hidup. Sangat cocok untuk sistem skala global dengan tim dev yang besar.',
-    codeSnippet: '// Order Service -> HTTP Call -> Payment Service'
+    category: 'Basic Logic Backend',
+    title: 'Sorting Logic',
+    description: 'Mengurutkan ribuan data.',
+    fullTheory: 'Algoritma untuk menyusun data (nama, harga) secara rapi agar user mudah mencari informasi di aplikasi.',
+    codeSnippet: 'Array.sort()'
   },
   {
     id: 'BE-032',
-    category: 'Infrastructure',
-    title: 'CI/CD Pipelines',
-    description: 'Otomatisasi pengujian dan peluncuran kode ke server.',
-    fullTheory: 'Continuous Integration (CI) menjalankan test otomatis setiap ada perubahan. Continuous Deployment (CD) langsung mengunggah kode ke server jika test lulus. Mengurangi human error saat rilis.',
-    codeSnippet: '// GitHub Actions: push -> test -> build -> deploy'
+    category: 'Basic Logic Backend',
+    title: 'Binary Search',
+    description: 'Pencarian super cepat.',
+    fullTheory: 'Teknik mencari data di list terurut dengan membelah data menjadi dua terus menerus. Sangat efisien.',
+    codeSnippet: 'while (left <= right)'
   },
-
-  // SECTION 6: SYSTEM UTILITIES (76-100)
   {
     id: 'BE-033',
-    category: 'System Utilities',
-    title: 'Scheduler (Cron Jobs)',
-    description: 'Menjalankan tugas otomatis pada waktu atau interval tertentu.',
-    fullTheory: 'Digunakan untuk kalkulasi laporan harian setiap jam 12 malam, membersihkan file-file cache yang sudah kadaluarsa, atau mengirimkan notifikasi tagihan setiap akhir bulan.',
-    codeSnippet: '@Scheduled(cron = "0 0 0 * * *") // Setiap tengah malam'
+    category: 'Basic Logic Backend',
+    title: 'Hash Map Collisions',
+    description: 'Menangani kunci ganda.',
+    fullTheory: 'Logika tentang bagaimana komputer menyimpan data jika dua kata kunci menghasilkan alamat memori yang sama.',
+    codeSnippet: 'Linked List in Bucket'
   },
   {
     id: 'BE-034',
-    category: 'System Utilities',
-    title: 'File Transfer: Upload & Download',
-    description: 'Manajemen file besar dan skalabilitas media storage.',
-    fullTheory: 'Untuk file besar, gunakan Multipart Upload dan simpanlah di Object Storage (seperti AWS S3 atau MinIO). Jangan pernah simpan file gambar/dokumen langsung di dalam Database SQL.',
-    codeSnippet: 's3Client.putObject(bucket, key, fileInputStream);'
+    category: 'Basic Logic Backend',
+    title: 'Linked List logic',
+    description: 'Data berantai.',
+    fullTheory: 'Struktur data di mana setiap data menunjuk ke data berikutnya. Sangat fleksibel untuk tambah data di tengah.',
+    codeSnippet: 'node.next = newNode'
   },
   {
     id: 'BE-035',
-    category: 'System Utilities',
-    title: 'Audit Trail & Logging',
-    description: 'Mencatat jejak aktivitas sistem untuk audit dan debugging.',
-    fullTheory: 'Gunakan Logger (SLF4J, Logback) untuk mencatat kejadian penting. Audit trail mencatat "Siapa mengubah apa, kapan, dan nilainya apa" untuk kepatuhan keamanan data.',
-    codeSnippet: 'logger.info("Admin {} changed price of item {}", adminId, itemId);'
+    category: 'Basic Logic Backend',
+    title: 'Recursion Base Case',
+    description: 'Titik henti perulangan.',
+    fullTheory: 'Setiap fungsi yang memanggil dirinya sendiri wajib punya titik henti agar komputer tidak hang (Stack Overflow).',
+    codeSnippet: 'if (n == 0) return 1'
   },
   {
     id: 'BE-036',
-    category: 'System Utilities',
-    title: 'Document Processing: Jasper & PDF',
-    description: 'Pembuatan laporan otomatis dalam format PDF, Excel, atau Word.',
-    fullTheory: 'Menggunakan template (JasperReports atau library khusus) untuk menghasilkan invoice atau sertifikat secara dinamis dari data di database dan mengirimkannya ke user.',
-    codeSnippet: 'JasperExportManager.exportReportToPdfFile(jasperPrint, "report.pdf");'
+    category: 'Basic Logic Backend',
+    title: 'Stacks (LIFO)',
+    description: 'Tumpukan terakhir, keluar pertama.',
+    fullTheory: 'Logika piring tumpuk. Digunakan untuk fungsi Undo/Redo atau navigasi kembali di aplikasi.',
+    codeSnippet: 'stack.push() / pop()'
   },
   {
     id: 'BE-037',
-    category: 'System Utilities',
-    title: 'Asynchronous Programming (Threads)',
-    description: 'Mengeksekusi kode tanpa menghalangi alur utama (Non-blocking).',
-    fullTheory: 'Memanfaatkan Thread Pooling untuk mengeksekusi banyak tugas secara paralel tanpa menghabiskan resource memori server. Paling utama digunakan di framework seperti Spring atau .NET.',
-    codeSnippet: '@Async\npublic void processInBackground() { ... }'
+    category: 'Basic Logic Backend',
+    title: 'Bitwise Operations',
+    description: 'Logika biner 0 dan 1.',
+    fullTheory: 'Operasi langsung pada level bit untuk performa maksimal dan efisiensi ruang penyimpanan di database.',
+    codeSnippet: 'a & b (AND)'
   },
   {
     id: 'BE-038',
-    category: 'System Utilities',
-    title: 'WebSocket: Real-time Communication',
-    description: 'Koneksi dua arah permanen antar server dan client.',
-    fullTheory: 'Berbeda dengan request HTTP biasa yang langsung putus, WebSocket menjaga koneksi tetap terbuka untuk aplikasi Chat, Dashboard Real-time, atau Notifikasi Instan tanpa perlu Refresh.',
-    codeSnippet: 'socket.emit("notification", { message: "Ada order baru!" });'
+    category: 'Basic Logic Backend',
+    title: 'Logic Gates in Code',
+    description: 'AND, OR, NOT.',
+    fullTheory: 'Pondasi segala keputusan di backend. Mengatur alur logika apakah user boleh lanjut atau berhenti.',
+    codeSnippet: 'if (isOk && hasPerm)'
   },
   {
     id: 'BE-039',
-    category: 'System Utilities',
-    title: 'API Documentation: Swagger',
-    description: 'Membuat halaman interaktif untuk mencoba API Anda.',
-    fullTheory: 'Swagger secara otomatis membaca endpoint di kode Anda dan menyediakannya dalam bentuk UI web agar developer Frontend tahu cara memanggil API tanpa perlu tanya manual.',
-    codeSnippet: '@Operation(summary = "Mendapatkan detail user")'
+    category: 'Basic Logic Backend',
+    title: 'Big O Notation',
+    description: 'Skalabilitas kode.',
+    fullTheory: 'Mengukur seberapa lambat kode Anda jika data bertambah dari 100 menjadi 100 juta.',
+    codeSnippet: 'O(n) - Linear Time'
   },
   {
     id: 'BE-040',
-    category: 'System Utilities',
-    title: 'Exception Handling: Strategy',
-    description: 'Menangkap error dengan rapi agar tidak menampilkan kode mentah ke user.',
-    fullTheory: 'Gunakan Global Exception Handler untuk menangkap semua error yang tak terduga. Balaslah user dengan pesan yang ramah (User Friendly) daripada Stack Trace yang membingungkan.',
-    codeSnippet: '@ControllerAdvice\npublic class ErrorHandler { ... }'
+    category: 'Basic Logic Backend',
+    title: 'Stack vs Heap',
+    description: 'Manajemen memori.',
+    fullTheory: 'Stack untuk variabel lokal yang cepat. Heap untuk objek besar yang hidup lebih lama di memori server.',
+    codeSnippet: 'int a; // Stack\nUser u; // Heap'
   },
-
-  // HARD SKILLS & FUNDAMENTALS (REMAINING 41-100)
   {
     id: 'BE-041',
-    category: 'Fundamentals',
-    title: 'Programming Logic: Recursion',
-    description: 'Fungsi yang memanggil dirinya sendiri secara berulang.',
-    fullTheory: 'Sering digunakan untuk navigasi folder, struktur pohon kategori, atau algoritma matematika kompleks. Harus memiliki base-case agar tidak Stack Overflow.',
-    codeSnippet: 'int fact(n) { return (n <= 1) ? 1 : n * fact(n-1); }'
+    category: 'Basic Logic Backend',
+    title: 'Tree DFS Search',
+    description: 'Pencarian mendalam.',
+    fullTheory: 'Menyisir struktur hierarki (kategori pohon) dengan masuk ke cabang terdalam dulu sebelum pindah.',
+    codeSnippet: 'recursive(node.child)'
   },
   {
     id: 'BE-042',
-    category: 'Fundamentals',
-    title: 'Data Structure: Hash Maps',
-    description: 'Penyimpanan data Key-Value dengan kecepatan pencarian instan.',
-    fullTheory: 'Struktur data paling efisien untuk mencari data berdasarkan kunci unik. Waktu aksesnya konstan O(1), sangat cocok untuk caching data kecil.',
-    codeSnippet: 'Map<String, User> userCache = new HashMap<>();'
+    category: 'Basic Logic Backend',
+    title: 'Graph Theory',
+    description: 'Hubungan antar titik.',
+    fullTheory: 'Digunakan untuk rekomendasi pertemanan atau mencari rute terdekat di peta (Google Maps logic).',
+    codeSnippet: 'Nodes & Edges'
   },
   {
     id: 'BE-043',
-    category: 'Fundamentals',
-    title: 'Hard Skill: Problem Solving Breakdown',
-    description: 'Seni memecahkan masalah besar menjadi ribuan masalah kecil.',
-    fullTheory: 'Identifikasi masalah -> Pisahkan menjadi modul-modul -> Kerjakan secara bertahap -> Integrasikan. Jangan mencoba menyelesaikan semuanya sekaligus.',
-    codeSnippet: '// Break: Order -> Payment -> Inventory -> Shipping'
+    category: 'Basic Logic Backend',
+    title: 'Dynamic Programming',
+    description: 'Ingat hasil lama.',
+    fullTheory: 'Menyimpan hasil perhitungan sebelumnya agar tidak dihitung ulang, menghemat waktu proses CPU secara masif.',
+    codeSnippet: 'memo[n] = result'
   },
   {
     id: 'BE-044',
-    category: 'Infrastructure',
-    title: 'Cloud Managed Services (AWS RDS/S3)',
-    description: 'Menggunakan infrastruktur siap pakai di awan.',
-    fullTheory: 'Daripada mengelola database sendiri, gunakan RDS. Daripada simpan file di HDD server, gunakan S3. Memudahkan scaling sistem tanpa pusing kelola OS server.',
-    codeSnippet: '// API call to AWS Cloud SDK'
+    category: 'Basic Logic Backend',
+    title: 'Greedy Algorithms',
+    description: 'Ambil yang terbaik sekarang.',
+    fullTheory: 'Strategi mengambil keputusan terbaik di setiap langkah tanpa peduli masa depan. Cepat tapi belum tentu optimal.',
+    codeSnippet: 'findMax(local)'
   },
   {
     id: 'BE-045',
-    category: 'Infrastructure',
-    title: 'API Rate Limiting',
-    description: 'Mencegah pemakaian API berlebihan dan serangan DDoS.',
-    fullTheory: 'Membatasi berapa kali user bisa memanggil API dalam satu menit. Menjaga ketersediaan resource bagi user lain agar server tidak tumbang karena spam.',
-    codeSnippet: 'Window: 60s, Limit: 100 requests'
+    category: 'Basic Logic Backend',
+    title: 'Regular Expressions',
+    description: 'Pencarian pola teks.',
+    fullTheory: 'Bahasa khusus untuk memvalidasi format email, nomor telepon, atau mencari kata tertentu dalam ribuan teks.',
+    codeSnippet: '/^[a-z]+$/'
   },
-  // ... more topics will be added up to 100 in the final file export
+  {
+    id: 'BE-046',
+    category: 'Basic Logic Backend',
+    title: 'String Efficiency',
+    description: 'StringBuilder logic.',
+    fullTheory: 'Jangan gabung teks di dalam loop pakai tanda plus (+). Gunakan StringBuilder agar hemat memori server.',
+    codeSnippet: 'sb.append("txt")'
+  },
+  {
+    id: 'BE-047',
+    category: 'Basic Logic Backend',
+    title: 'File I/O Stream',
+    description: 'Baca tulis file.',
+    fullTheory: 'Membaca data dari disk sepotong demi sepotong agar RAM server tidak penuh saat buka file ukuran GB.',
+    codeSnippet: 'InputStream.read()'
+  },
+  {
+    id: 'BE-048',
+    category: 'Basic Logic Backend',
+    title: 'Stream Processing',
+    description: 'Filter data bergaya fungsional.',
+    fullTheory: 'Cara modern memproses koleksi data dengan gaya deklaratif (Filter, Map, Reduce) yang bersih dan efisien.',
+    codeSnippet: 'list.stream().filter()'
+  },
+  {
+    id: 'BE-049',
+    category: 'Basic Logic Backend',
+    title: 'Parallel vs Concurrent',
+    description: 'Banyak tugas sekaligus.',
+    fullTheory: 'Concurrent: bergantian sangat cepat. Parallel: benar-benar dikerjakan di waktu yang sama oleh CPU berbeda.',
+    codeSnippet: 'Multi-core processing'
+  },
+  {
+    id: 'BE-050',
+    category: 'Basic Logic Backend',
+    title: 'Thread Safety',
+    description: 'Cegah tabrakan data.',
+    fullTheory: 'Memastikan data tidak rusak saat diakses oleh dua proses yang berjalan bersamaan di server.',
+    codeSnippet: 'synchronized(obj) { ... }'
+  },
+  {
+    id: 'BE-051',
+    category: 'Basic Logic Backend',
+    title: 'Deadlock logic',
+    description: 'Saling tunggu selamanya.',
+    fullTheory: 'Kondisi di mana dua proses saling menunggu satu sama lain, mengakibatkan server "Freeze" total.',
+    codeSnippet: 'A waits B, B waits A'
+  },
+  {
+    id: 'BE-052',
+    category: 'Basic Logic Backend',
+    title: 'Race Condition',
+    description: 'Balapan update data.',
+    fullTheory: 'Bug yang terjadi jika hasil akhir tergantung pada urutan siapa yang lebih duluan selesai eksekusi.',
+    codeSnippet: 'Update x = x + 1'
+  },
+  {
+    id: 'BE-053',
+    category: 'Basic Logic Backend',
+    title: 'Data Validation logic',
+    description: 'Filter input kotor.',
+    fullTheory: 'Logika untuk memastikan data yang masuk ke sistem sesuai aturan bisnis (Misal: Umur tidak boleh minus).',
+    codeSnippet: 'if (age < 0) throw Err'
+  },
+  {
+    id: 'BE-054',
+    category: 'Basic Logic Backend',
+    title: 'Business Isolation',
+    description: 'Pisahkan logika inti.',
+    fullTheory: 'Memisahkan aturan bisnis (Misal: Perhitungan pajak) dari cara simpan ke database agar kode mudah diganti.',
+    codeSnippet: 'Logic != Database'
+  },
+  {
+    id: 'BE-055',
+    category: 'Basic Logic Backend',
+    title: 'DTO Pattern',
+    description: 'Kurir data.',
+    fullTheory: 'Objek sederhana khusus untuk membawa data antar layer tanpa membawa logika bisnis yang berat.',
+    codeSnippet: 'class UserDTO { name; }'
+  },
+  {
+    id: 'BE-056',
+    category: 'Basic Logic Backend',
+    title: 'Value Objects',
+    description: 'Data berdasarkan nilai.',
+    fullTheory: 'Objek yang identitasnya ditentukan oleh isinya (Misal: Warna "Merah"). Jika isinya sama, objek dianggap sama.',
+    codeSnippet: 'email = new Email("x")'
+  },
+  {
+    id: 'BE-057',
+    category: 'Basic Logic Backend',
+    title: 'Entity vs Model',
+    description: 'Data DB vs Data Logik.',
+    fullTheory: 'Entity mewakili baris di tabel database. Model mewakili data yang sedang diproses oleh alur logika aplikasi.',
+    codeSnippet: '@Entity vs Class'
+  },
+  {
+    id: 'BE-058',
+    category: 'Basic Logic Backend',
+    title: 'Factory Pattern',
+    description: 'Pusat pembuatan objek.',
+    fullTheory: 'Memberikan satu pintu untuk membuat objek kompleks tanpa perlu tahu cara membuatnya di banyak tempat.',
+    codeSnippet: 'Factory.get("SMS")'
+  },
+  {
+    id: 'BE-059',
+    category: 'Basic Logic Backend',
+    title: 'Strategy Pattern',
+    description: 'Pilih taktik saat jalan.',
+    fullTheory: 'Memilih alur logika saat aplikasi berjalan (Misal: Pilih metode bayar kartu atau tunai di tengah jalan).',
+    codeSnippet: 'exec(cardPayStrategy)'
+  },
+  {
+    id: 'BE-060',
+    category: 'Basic Logic Backend',
+    title: 'Observer Pattern',
+    description: 'Langganan notifikasi.',
+    fullTheory: 'Satu proses memberitahu banyak proses lain secara otomatis saat ada perubahan terjadi (Broadcast).',
+    codeSnippet: 'subject.notifyAll()'
+  },
+
+  // SECTION 3: SPRING BOOT (61-90)
+  {
+    id: 'BE-061',
+    category: 'Spring Boot',
+    title: 'IoC Container',
+    description: 'Wadah manajemen objek.',
+    fullTheory: 'Spring yang bertanggung jawab membuat dan mengatur instansi objek aplikasi Anda secara otomatis.',
+    codeSnippet: 'Spring Context'
+  },
+  {
+    id: 'BE-062',
+    category: 'Spring Boot',
+    title: 'Dependency Injection',
+    description: 'Suntikan objek otomatis.',
+    fullTheory: 'Memberikan objek yang dibutuhkan ke dalam sebuah class tanpa class tersebut harus membuatnya sendiri.',
+    codeSnippet: '@Autowired private Svc s;'
+  },
+  {
+    id: 'BE-063',
+    category: 'Spring Boot',
+    title: 'Constructor Injection',
+    description: 'Suntikan via konstruktor.',
+    fullTheory: 'Cara terbaik menyuntikkan dependensi karena menjamin objek tidak null dan lebih mudah di-test.',
+    codeSnippet: 'public Svc(Repo r) { .. }'
+  },
+  {
+    id: 'BE-064',
+    category: 'Spring Boot',
+    title: '@Component vs @Service',
+    description: 'Identitas bean Spring.',
+    fullTheory: '@Component adalah umum. @Service menunjukkan class berisi logika bisnis utama aplikasi Anda.',
+    codeSnippet: '@Service class MyBiz { }'
+  },
+  {
+    id: 'BE-065',
+    category: 'Spring Boot',
+    title: '@Repository vs @Controller',
+    description: 'Layer DB vs Layer API.',
+    fullTheory: 'Repository untuk akses data. Controller untuk menerima request dari internet (Entry point).',
+    codeSnippet: '@Repository interface R { }'
+  },
+  {
+    id: 'BE-066',
+    category: 'Spring Boot',
+    title: 'Bean Lifecycle',
+    description: 'Siklus hidup objek.',
+    fullTheory: 'Urutan kejadian sejak objek dibuat, diisi datanya, hingga dihancurkan oleh sistem Spring.',
+    codeSnippet: '@PostConstruct / @PreDestroy'
+  },
+  {
+    id: 'BE-067',
+    category: 'Spring Boot',
+    title: 'Application Context',
+    description: 'Pusat integrasi Spring.',
+    fullTheory: 'Otak besar Spring yang memegang semua informasi konfigurasi dan bean aplikasi dalam satu tempat.',
+    codeSnippet: 'context.getBean("name")'
+  },
+  {
+    id: 'BE-068',
+    category: 'Spring Boot',
+    title: 'Auto-configuration',
+    description: 'Konfigurasi tanpa mikir.',
+    fullTheory: 'Spring Boot mendeteksi apa yang ada di library Anda dan melakukan setup otomatis (Misal: Konek DB otomatis).',
+    codeSnippet: 'Magic of Spring Boot'
+  },
+  {
+    id: 'BE-069',
+    category: 'Spring Boot',
+    title: 'Component Scanning',
+    description: 'Pencarian bean otomatis.',
+    fullTheory: 'Spring menyisir seluruh folder folder Anda untuk mencari label seperti @Service agar bisa dikelola.',
+    codeSnippet: '@ComponentScan("com.app")'
+  },
+  {
+    id: 'BE-070',
+    category: 'Spring Boot',
+    title: 'Spring Starters',
+    description: 'Paket dependensi praktis.',
+    fullTheory: 'Sekumpulan library yang sudah dikelompokkan (e.g., Web, JPA) agar Anda tidak perlu pusing pilih versi manual.',
+    codeSnippet: 'spring-boot-starter-web'
+  },
+  {
+    id: 'BE-071',
+    category: 'Spring Boot',
+    title: 'Properties & YAML',
+    description: 'File setting aplikasi.',
+    fullTheory: 'Tempat menaruh alamat database, password, atau port aplikasi agar tidak tercampur di kode program.',
+    codeSnippet: 'server.port = 8080'
+  },
+  {
+    id: 'BE-072',
+    category: 'Spring Boot',
+    title: 'Spring Data JPA',
+    description: 'Akses DB gaya modern.',
+    fullTheory: 'Memungkinkan query database cukup dengan membuat interface, tanpa perlu menulis SQL yang panjang.',
+    codeSnippet: 'repo.findAll()'
+  },
+  {
+    id: 'BE-073',
+    category: 'Spring Boot',
+    title: 'Transaction Management',
+    description: 'Keamanan data transaksi.',
+    fullTheory: 'Memastikan proses simpan ke banyak tabel berhasil semua atau gagal semua (Rollback) demi integritas data.',
+    codeSnippet: '@Transactional void do() { }'
+  },
+  {
+    id: 'BE-074',
+    category: 'Spring Boot',
+    title: 'Spring Security Chains',
+    description: 'Rantai filter keamanan.',
+    fullTheory: 'Setiap request harus lewat "Satpam" Spring untuk dicek tokennya sebelum boleh masuk ke controller.',
+    codeSnippet: 'SecurityFilterChain filter'
+  },
+  {
+    id: 'BE-075',
+    category: 'Spring Boot',
+    title: 'JWT in Spring',
+    description: 'Token login mandiri.',
+    fullTheory: 'Menggunakan token berisi identitas user agar server tidak perlu simpan data session di RAM.',
+    codeSnippet: 'Bearer eyJhbGci...'
+  },
+  {
+    id: 'BE-076',
+    category: 'Spring Boot',
+    title: 'Spring Actuator',
+    description: 'Dashboard kesehatan sistem.',
+    fullTheory: 'Endpoint khusus (/health) untuk mengecek apakah aplikasi masih sehat atau sudah mati di server.',
+    codeSnippet: 'GET /actuator/health'
+  },
+  {
+    id: 'BE-077',
+    category: 'Spring Boot',
+    title: 'Spring WebFlux',
+    description: 'Backend gaya reaktif.',
+    fullTheory: 'Teknik menangani trafik jutaan user dengan sedikit thread (Non-blocking) untuk efisiensi RAM maksimal.',
+    codeSnippet: 'Mono<User> findUser()'
+  },
+  {
+    id: 'BE-078',
+    category: 'Spring Boot',
+    title: 'Spring Cloud Config',
+    description: 'Konfigurasi pusat cloud.',
+    fullTheory: 'Menyimpan konfigurasi banyak server di satu tempat pusat agar mudah diatur saat rilis besar.',
+    codeSnippet: 'Config Server Client'
+  },
+  {
+    id: 'BE-079',
+    category: 'Spring Boot',
+    title: 'Spring Cloud Gateway',
+    description: 'Gerbang masuk trafik.',
+    fullTheory: 'Satu pintu masuk untuk ribuan microservices yang bertugas mengatur rute dan keamanan masuk.',
+    codeSnippet: 'Gateway Route Filter'
+  },
+  {
+    id: 'BE-080',
+    category: 'Spring Boot',
+    title: 'Feign Client',
+    description: 'Komunikasi antar server.',
+    fullTheory: 'Memanggil API dari server lain semudah memanggil fungsi biasa di dalam kode aplikasi Anda.',
+    codeSnippet: '@FeignClient("users")'
+  },
+  {
+    id: 'BE-081',
+    category: 'Spring Boot',
+    title: 'Resilience4j',
+    description: 'Penahan beban error.',
+    fullTheory: 'Memutus koneksi sementara (Circuit Breaker) jika server lawan lambat agar aplikasi kita tidak ikut hang.',
+    codeSnippet: '@CircuitBreaker'
+  },
+  {
+    id: 'BE-082',
+    category: 'Spring Boot',
+    title: '@MockBean Test',
+    description: 'Tes dengan objek palsu.',
+    fullTheory: 'Mengganti database asli dengan data bohongan saat melakukan tes agar proses tes sangat cepat.',
+    codeSnippet: '@MockBean private Repo r;'
+  },
+  {
+    id: 'BE-083',
+    category: 'Spring Boot',
+    title: 'Profiles (Dev vs Prod)',
+    description: 'Pengaturan beda lingkungan.',
+    fullTheory: 'Menggunakan settingan berbeda untuk komputer koding (Dev) dan server asli (Prod) secara otomatis.',
+    codeSnippet: '@Profile("prod")'
+  },
+  {
+    id: 'BE-084',
+    category: 'Spring Boot',
+    title: '@Async Methods',
+    description: 'Tugas di latar belakang.',
+    fullTheory: 'Menjalankan fungsi (Misal: Kirim SMS) di jalur berbeda agar user tidak harus menunggu loading selesai.',
+    codeSnippet: '@Async void sendSms() { }'
+  },
+  {
+    id: 'BE-085',
+    category: 'Spring Boot',
+    title: 'Scheduling',
+    description: 'Tugas rutin terjadwal.',
+    fullTheory: 'Menjalankan fungsi setiap waktu tertentu (Misal: Kirim laporan harian setiap jam 12 malam).',
+    codeSnippet: '@Scheduled(cron = "...")'
+  },
+  {
+    id: 'BE-086',
+    category: 'Spring Boot',
+    title: '@Valid Validation',
+    description: 'Cek input otomatis.',
+    fullTheory: 'Memeriksa apakah data yang dikirim user (Email, Nama) sudah benar formatnya secara otomatis.',
+    codeSnippet: 'public (@Valid User u)'
+  },
+  {
+    id: 'BE-087',
+    category: 'Spring Boot',
+    title: '@ControllerAdvice',
+    description: 'Manajer error global.',
+    fullTheory: 'Menangkap kegagalan di seluruh controller aplikasi agar response error seragam dan bersih.',
+    codeSnippet: 'interceptException(e)'
+  },
+  {
+    id: 'BE-088',
+    category: 'Spring Boot',
+    title: 'Spring AOP',
+    description: 'Logika titipan.',
+    fullTheory: 'Menitipkan logika (Log, Auth) ke banyak fungsi sekaligus tanpa menulis ulang kode di tiap fungsi.',
+    codeSnippet: '@Aspect class Logger { }'
+  },
+  {
+    id: 'BE-089',
+    category: 'Spring Boot',
+    title: 'Bean Scopes',
+    description: 'Jangka waktu hidup objek.',
+    fullTheory: 'Mengatur apakah satu objek dipakai rame-rame (Singleton) atau satu user dapat satu objek baru (Session).',
+    codeSnippet: '@Scope("prototype")'
+  },
+  {
+    id: 'BE-090',
+    category: 'Spring Boot',
+    title: 'Health Indicators',
+    description: 'Detail status kesehatan.',
+    fullTheory: 'Memberikan info apakah koneksi DB, Disk, atau RAM masih cukup untuk menjalankan aplikasi.',
+    codeSnippet: 'Health.up().build()'
+  },
+
+  // SECTION 4: DEVOPS (91-120)
+  {
+    id: 'BE-091',
+    category: 'DevOps',
+    title: 'CI/CD Pipeline',
+    description: 'Otomasi rilis koding.',
+    fullTheory: 'Proses otomatis dari koding selesai, tes otomatis, hingga aplikasi terpasang di server tanpa klik manual.',
+    codeSnippet: 'Push -> Test -> Deploy'
+  },
+  {
+    id: 'BE-092',
+    category: 'DevOps',
+    title: 'Continuous Integration',
+    description: 'Tes gabungan tiap detik.',
+    fullTheory: 'Memastikan tiap baris kode baru dari developer tidak merusak fitur lama dengan menjalankan tes otomatis.',
+    codeSnippet: 'mvn test on Commit'
+  },
+  {
+    id: 'BE-093',
+    category: 'DevOps',
+    title: 'Continuous Deployment',
+    description: 'Update server instan.',
+    fullTheory: 'Menerbitkan aplikasi versi terbaru ke server segera setelah lolos dari semua tahap pengujian otomatis.',
+    codeSnippet: 'Auto deploy to Prod'
+  },
+  {
+    id: 'BE-094',
+    category: 'DevOps',
+    title: 'GitHub Actions',
+    description: 'Otomasi via GitHub.',
+    fullTheory: 'Platform untuk menjalankan skrip build dan rilis langsung saat Anda melakukan "Push" ke GitHub.',
+    codeSnippet: '.github/workflows/ci.yml'
+  },
+  {
+    id: 'BE-095',
+    category: 'DevOps',
+    title: 'Jenkins Pipelines',
+    description: 'Robot rilis legendaris.',
+    fullTheory: 'Aplikasi server khusus untuk mengatur alur kerja rilis software yang sangat kompleks dan aman.',
+    codeSnippet: 'node { stage("build") }'
+  },
+  {
+    id: 'BE-096',
+    category: 'DevOps',
+    title: 'GitLab CI',
+    description: 'Otomasi dari GitLab.',
+    fullTheory: 'Sistem otomasi bawaan GitLab yang mengelola build dan deployment lewat file konfigurasi YAML sederhana.',
+    codeSnippet: '.gitlab-ci.yml'
+  },
+  {
+    id: 'BE-097',
+    category: 'DevOps',
+    title: 'Infrastructure as Code',
+    description: 'Server dalam baris kode.',
+    fullTheory: 'Membangun ribuan server AWS/Google Cloud cukup dengan naskah kode (Terraform), bukan klik manual.',
+    codeSnippet: 'terraform apply'
+  },
+  {
+    id: 'BE-098',
+    category: 'DevOps',
+    title: 'Ansible Config',
+    description: 'Pengaturan masif server.',
+    fullTheory: 'Memberi perintah ke ratusan server sekaligus untuk update OS atau install aplikasi secara serentak.',
+    codeSnippet: 'ansible-playbook setup.yml'
+  },
+  {
+    id: 'BE-099',
+    category: 'DevOps',
+    title: 'AWS EC2 Basics',
+    description: 'Sewa komputer virtual.',
+    fullTheory: 'Layanan sewa server di awan (Cloud) untuk menjalankan aplikasi backend Anda dengan biaya sewa bulanan.',
+    codeSnippet: 'Virtual Machine in Cloud'
+  },
   {
     id: 'BE-100',
-    category: 'System Architecture',
-    title: 'Monitoring: ELK Stack',
-    description: 'Analisis log dan monitoring kesehatan sistem skala besar.',
-    fullTheory: 'Elasticsearch (Search), Logstash (Processing), dan Kibana (Visualization) bekerja sama untuk menganalisis jutaan log aplikasi agar masalah bisa dideteksi sebelum merugikan bisnis.',
-    codeSnippet: '// Dashboard analysis for status codes and error rates'
+    category: 'DevOps',
+    title: 'Managed RDS',
+    description: 'Database di awan.',
+    fullTheory: 'Layanan database yang diurus otomatis oleh cloud (AWS/GCP), mulai dari backup hingga update keamanan.',
+    codeSnippet: 'AWS Relational DB Svc'
+  },
+  {
+    id: 'BE-101',
+    category: 'DevOps',
+    title: 'Prometheus Monitoring',
+    description: 'Cek kesehatan server.',
+    fullTheory: 'Aplikasi yang memonitor statistik server (CPU/RAM) dan lapor jika server kepanasan atau sedang overload.',
+    codeSnippet: 'scrape_interval: 15s'
+  },
+  {
+    id: 'BE-102',
+    category: 'DevOps',
+    title: 'Grafana Dashboards',
+    description: 'Grafik performa cantik.',
+    fullTheory: 'Menampilkan data statistik server dalam bentuk grafik warna-warni agar tim bisa pantau kondisi aplikasi.',
+    codeSnippet: 'Query: sum(http_err)'
+  },
+  {
+    id: 'BE-103',
+    category: 'DevOps',
+    title: 'ELK Stack logging',
+    description: 'Pencarian log masif.',
+    fullTheory: 'Teknik mengumpulkan jutaan baris catatan (Log) aplikasi ke satu tempat agar mudah dicari saat ada masalah.',
+    codeSnippet: 'Logstash -> ES -> Kibana'
+  },
+  {
+    id: 'BE-104',
+    category: 'DevOps',
+    title: 'Distributed Tracing',
+    description: 'Lacak alur request.',
+    fullTheory: 'Melacak satu request user yang masuk ke sistem dan melihat berapa lama waktu yang habis di tiap layanan.',
+    codeSnippet: 'Trace-ID: uuid-789'
+  },
+  {
+    id: 'BE-105',
+    category: 'DevOps',
+    title: 'Blue-Green Deploy',
+    description: 'Rilis dua server.',
+    fullTheory: 'Menjalankan server lama (Blue) dan baru (Green) secara bersamaan sebelum memindahkan user ke yang baru.',
+    codeSnippet: 'Switch Load Balancer'
+  },
+  {
+    id: 'BE-106',
+    category: 'DevOps',
+    title: 'Canary Release logic',
+    description: 'Uji coba fitur kecil.',
+    fullTheory: 'Membuka fitur baru hanya untuk 5% user untuk melihat apakah ada bug sebelum dilepas ke 100% user.',
+    codeSnippet: '5% user see v2'
+  },
+  {
+    id: 'BE-107',
+    category: 'DevOps',
+    title: 'K8s Rolling Update',
+    description: 'Ganti pod perlahan.',
+    fullTheory: 'Memperbarui aplikasi satu per satu di Kubernetes agar layanan tidak pernah mati total saat update.',
+    codeSnippet: 'kubectl rollout status'
+  },
+  {
+    id: 'BE-108',
+    category: 'DevOps',
+    title: 'Static Code Analysis',
+    description: 'Cek kualitas koding.',
+    fullTheory: 'Software otomatis (SonarQube) yang memeriksa apakah kode Anda kotor, ada bug tersembunyi, atau celah keamanan.',
+    codeSnippet: 'Analysis by SonarQube'
+  },
+  {
+    id: 'BE-109',
+    category: 'DevOps',
+    title: 'Dependency Scanning',
+    description: 'Cek library berbahaya.',
+    fullTheory: 'Memastikan library yang Anda gunakan (seperti Spring/Jackson) tidak punya celah keamanan yang bisa diretas.',
+    codeSnippet: 'Security Scan: Clear'
+  },
+  {
+    id: 'BE-110',
+    category: 'DevOps',
+    title: 'Docker Image Registry',
+    description: 'Gudang penyimpanan image.',
+    fullTheory: 'Tempat menaruh paket aplikasi (Image) agar server deployment bisa mendownloadnya dengan lancar.',
+    codeSnippet: 'docker push registry.com'
+  },
+  {
+    id: 'BE-111',
+    category: 'DevOps',
+    title: 'SSL (Let\'s Encrypt)',
+    description: 'Sertifikat keamanan gratis.',
+    fullTheory: 'Layanan publik untuk mendapatkan gembok hijau (HTTPS) pada website Anda secara otomatis dan gratis.',
+    codeSnippet: 'certbot renew'
+  },
+  {
+    id: 'BE-112',
+    category: 'DevOps',
+    title: 'Cloud DNS (Route53)',
+    description: 'Manajer alamat domain.',
+    fullTheory: 'Mengatur bagaimana namadomain.com diarahkan ke alamat IP server backend Anda di cloud.',
+    codeSnippet: 'A Record -> 12.34.56.78'
+  },
+  {
+    id: 'BE-113',
+    category: 'DevOps',
+    title: 'Cloud CDN',
+    description: 'Pengiriman data tercepat.',
+    fullTheory: 'Menyebarkan file website Anda ke ribuan server di seluruh dunia agar user bisa buka web dengan sangat kencang.',
+    codeSnippet: 'Edge Locations Caching'
+  },
+  {
+    id: 'BE-114',
+    category: 'DevOps',
+    title: 'Secret Management',
+    description: 'Brankas password cloud.',
+    fullTheory: 'Menyimpan password database secara aman agar tidak terlihat oleh siapapun termasuk developer aplikasi.',
+    codeSnippet: 'Vault: READ secret/db'
+  },
+  {
+    id: 'BE-115',
+    category: 'DevOps',
+    title: 'Backup/Restore logic',
+    description: 'Jaminan keamanan data.',
+    fullTheory: 'Strategi menyimpan cadangan data setiap hari agar jika server kena hack/kebakaran, data masih bisa diselamatkan.',
+    codeSnippet: 'Daily Backup Policy'
+  },
+  {
+    id: 'BE-116',
+    category: 'DevOps',
+    title: 'Disaster Recovery',
+    description: 'Rencana darurat sistem.',
+    fullTheory: 'Persiapan server cadangan di kota/negara lain yang siap nyala seketika jika server utama di Jakarta mati total.',
+    codeSnippet: 'Failover to Region B'
+  },
+  {
+    id: 'BE-117',
+    category: 'DevOps',
+    title: 'Horizontal Scaling',
+    description: 'Tambah jumlah server.',
+    fullTheory: 'Memperbanyak jumlah server (dari 1 jadi 10) untuk menangani jutaan user sekaligus secara bersamaan.',
+    codeSnippet: 'Scale: 1 -> 10 nodes'
+  },
+  {
+    id: 'BE-118',
+    category: 'DevOps',
+    title: 'Vertical Scaling',
+    description: 'Tambah tenaga server.',
+    fullTheory: 'Membesarkan kapasitas satu server (Tambah RAM/CPU) untuk menangani beban yang makin berat.',
+    codeSnippet: 'RAM: 4GB -> 32GB'
+  },
+  {
+    id: 'BE-119',
+    category: 'DevOps',
+    title: 'Chaos Engineering',
+    description: 'Uji daya tahan sistem.',
+    fullTheory: 'Sengaja mematikan server secara acak untuk melatih sistem agar tetap hidup dan tidak panik saat ada masalah asli.',
+    codeSnippet: 'Simian Army: Kill Node'
+  },
+  {
+    id: 'BE-120',
+    category: 'DevOps',
+    title: 'Target SLO (Objective)',
+    description: 'Target janji layanan.',
+    fullTheory: 'Janji kualitas layanan ke user, misal: "Aplikasi ini dijamin nyala 99.9% waktu dalam setahun".',
+    codeSnippet: 'Uptime target: 99.9%'
+  },
+
+  // SECTION 5: DOCKERIZE (121-150)
+  {
+    id: 'BE-121',
+    category: 'Dockerize',
+    title: 'Docker Image Layers',
+    description: 'Lapisan tumpukan paket.',
+    fullTheory: 'Docker image dibangun dari lapisan (layers). Setiap baris kode di Dockerfile akan membuat lapisan baru yang tersimpan permanen.',
+    codeSnippet: 'Each line = new layer'
+  },
+  {
+    id: 'BE-122',
+    category: 'Dockerize',
+    title: 'Dockerfile Practices',
+    description: 'Aturan bikin image rapi.',
+    fullTheory: 'Menyusun perintah Dockerfile agar proses build cepat dan ukuran image sekecil mungkin agar hemat bandwith.',
+    codeSnippet: 'COPY package.json first'
+  },
+  {
+    id: 'BE-123',
+    category: 'Dockerize',
+    title: 'FROM: Base Image',
+    description: 'Pondasi sistem operasi.',
+    fullTheory: 'Instruksi awal untuk menentukan sistem operasi dasar apa yang akan dipakai (Misal: Linux Ubuntu atau Alpine).',
+    codeSnippet: 'FROM openjdk:17-alpine'
+  },
+  {
+    id: 'BE-124',
+    category: 'Dockerize',
+    title: 'COPY vs ADD logic',
+    description: 'Pindah file ke container.',
+    fullTheory: 'COPY digunakan untuk memindahkan file biasa. ADD bisa digunakan untuk download file dari internet atau buka file ZIP.',
+    codeSnippet: 'COPY src/ /app/src/'
+  },
+  {
+    id: 'BE-125',
+    category: 'Dockerize',
+    title: 'RUN vs CMD instructions',
+    description: 'Build vs Start-up.',
+    fullTheory: 'RUN dijalankan saat sedang MEMBANGUN image. CMD dijalankan saat KONTAINER baru saja dinyalakan.',
+    codeSnippet: 'RUN npm install'
+  },
+  {
+    id: 'BE-126',
+    category: 'Dockerize',
+    title: 'ENTRYPOINT logic',
+    description: 'Perintah utama abadi.',
+    fullTheory: 'Menentukan aplikasi utama apa yang harus jalan di kontainer. Perintah ini tidak mudah diganti saat kontainer jalan.',
+    codeSnippet: 'ENTRYPOINT ["java", "-jar"]'
+  },
+  {
+    id: 'BE-127',
+    category: 'Dockerize',
+    title: 'Docker Volumes logic',
+    description: 'Penyimpanan data abadi.',
+    fullTheory: 'Memetakan folder di dalam kontainer ke folder nyata di PC Anda agar data (seperti Database) tidak terhapus.',
+    codeSnippet: '-v /my/data:/data'
+  },
+  {
+    id: 'BE-128',
+    category: 'Dockerize',
+    title: 'Docker Bridges networking',
+    description: 'Kabel virtual kontainer.',
+    fullTheory: 'Mode jaringan standar di mana kontainer bisa saling berbicara menggunakan IP internal khusus Docker.',
+    codeSnippet: 'Network: 172.17.0.x'
+  },
+  {
+    id: 'BE-129',
+    category: 'Dockerize',
+    title: 'Docker Compose YAML',
+    description: 'Naskah banyak kontainer.',
+    fullTheory: 'File teks berisi daftar aplikasi apa saja yang mau dinyalakan bareng (App, DB, Redis) agar praktis.',
+    codeSnippet: 'docker-compose up'
+  },
+  {
+    id: 'BE-130',
+    category: 'Dockerize',
+    title: 'Multi-stage builds',
+    description: 'Diet ukuran image.',
+    fullTheory: 'Proses membuang file sampah (seperti source code/compiler) setelah aplikasi jadi, sehingga image akhir super ringan.',
+    codeSnippet: 'FROM maven... COPY binary'
+  },
+  {
+    id: 'BE-131',
+    category: 'Dockerize',
+    title: 'Docker Hub Push/Pull',
+    description: 'Simpan unduh image.',
+    fullTheory: 'Mengunggah image buatan Anda ke internet agar orang lain atau server kantor bisa mengunduh dan memakainya.',
+    codeSnippet: 'docker push user/app:v1'
+  },
+  {
+    id: 'BE-132',
+    category: 'Dockerize',
+    title: 'Docker Exec command',
+    description: 'Masuk ke dalam kontainer.',
+    fullTheory: 'Perintah untuk "masuk" ke dalam kontainer yang sedang jalan untuk mengecek file atau memperbaiki error.',
+    codeSnippet: 'docker exec -it c_id sh'
+  },
+  {
+    id: 'BE-133',
+    category: 'Dockerize',
+    title: 'Port Exposure mapping',
+    description: 'Buka pintu akses luar.',
+    fullTheory: 'Menghubungkan port di dalam kontainer ke port komputer Anda agar aplikasi bisa dibuka di browser lokal.',
+    codeSnippet: '-p 8080:80'
+  },
+  {
+    id: 'BE-134',
+    category: 'Dockerize',
+    title: 'Docker ENV Vars',
+    description: 'Variabel rahasia kontainer.',
+    fullTheory: 'Cara memasukkan settingan rahasia (Password/ID) ke dalam kontainer tanpa harus menulisnya di kode Dockerfile.',
+    codeSnippet: '-e DB_PASS=secret123'
+  },
+  {
+    id: 'BE-135',
+    category: 'Dockerize',
+    title: 'Restart Policies',
+    description: 'Hidupkan otomatis.',
+    fullTheory: 'Instruksi agar Docker otomatis menghidupkan kembali kontainer yang mati karena crash atau setelah PC restart.',
+    codeSnippet: '--restart = always'
+  },
+  {
+    id: 'BE-136',
+    category: 'Dockerize',
+    title: 'Docker Logs tracking',
+    description: 'Melihat catatan aplikasi.',
+    fullTheory: 'Melihat apa yang diketik aplikasi Anda di dalam kontainer untuk melacak jika ada error atau pesan sukses.',
+    codeSnippet: 'docker logs -f c_id'
+  },
+  {
+    id: 'BE-137',
+    category: 'Dockerize',
+    title: 'Alpine Linux logic',
+    description: 'OS Linux paling mungil.',
+    fullTheory: 'Versi sistem operasi rahasia yang sangat kecil (hanya 5MB) yang sering dipakai sebagai pondasi image Docker.',
+    codeSnippet: 'base: alpine-linux'
+  },
+  {
+    id: 'BE-138',
+    category: 'Dockerize',
+    title: 'Distroless Images',
+    description: 'Image tanpa OS.',
+    fullTheory: 'Image paling aman karena tidak berisi aplikasi OS apapun (seperti bash/curl) kecuali aplikasi Anda sendiri.',
+    codeSnippet: 'Safe from hackers'
+  },
+  {
+    id: 'BE-139',
+    category: 'Dockerize',
+    title: 'Docker Swarm Basics',
+    description: 'Pasukan kontainer.',
+    fullTheory: 'Teknik mengatur banyak server Docker agar bekerja sebagai satu tim besar yang kuat dan tahan banting.',
+    codeSnippet: 'docker swarm init'
+  },
+  {
+    id: 'BE-140',
+    category: 'Dockerize',
+    title: 'K8s Pods Concept',
+    description: 'Satuan terkecil Kubernetes.',
+    fullTheory: 'Wadah terkecil di Kubernetes yang berisi satu atau lebih kontainer aplikasi yang saling berkaitan erat.',
+    codeSnippet: 'Smallest unit in K8s'
+  },
+  {
+    id: 'BE-141',
+    category: 'Dockerize',
+    title: 'K8s Deployments logic',
+    description: 'Pusat perintah rilis.',
+    fullTheory: 'Cara memberitahu Kubernetes berapa banyak jumlah kontainer yang harus jalan dan versi aplikasi ke berapa.',
+    codeSnippet: 'kind: Deployment'
+  },
+  {
+    id: 'BE-142',
+    category: 'Dockerize',
+    title: 'K8s Services logic',
+    description: 'Alamat stabil kontainer.',
+    fullTheory: 'Memberikan satu nama/alamat tetap bagi sekumpulan kontainer agar bisa diakses layanan lain dengan mudah.',
+    codeSnippet: 'kind: Service'
+  },
+  {
+    id: 'BE-143',
+    category: 'Dockerize',
+    title: 'K8s ConfigMaps',
+    description: 'Settingan luar pod.',
+    fullTheory: 'Menyimpan konfigurasi aplikasi (Seperti alamat API) di luar kontainer agar mudah diganti tanpa hapus aplikasi.',
+    codeSnippet: 'Config in YAML'
+  },
+  {
+    id: 'BE-144',
+    category: 'Dockerize',
+    title: 'K8s Secrets storage',
+    description: 'Penyimpanan password.',
+    fullTheory: 'Tempat menyimpan password dan kunci rahasia di Kubernetes dalam bentuk yang terenkripsi dan aman.',
+    codeSnippet: 'Encrypted Secrets'
+  },
+  {
+    id: 'BE-145',
+    category: 'Dockerize',
+    title: 'K8s Ingress entry',
+    description: 'Pintu gerbang cloud.',
+    fullTheory: 'Pusat pengaturan rute internet dari dunia luar masuk ke dalam ribuan aplikasi di dalam cluster Kubernetes.',
+    codeSnippet: 'Route: a.com -> svc'
+  },
+  {
+    id: 'BE-146',
+    category: 'Dockerize',
+    title: 'Helm Charts usage',
+    description: 'Toko aplikasi k8s.',
+    fullTheory: 'Template paket siap pakai untuk menginstal aplikasi kompleks di Kubernetes cukup dengan satu perintah.',
+    codeSnippet: 'helm install redis'
+  },
+  {
+    id: 'BE-147',
+    category: 'Dockerize',
+    title: 'Resource Limits logic',
+    description: 'Batasan jatah RAM/CPU.',
+    fullTheory: 'Membatasi agar satu aplikasi yang rakus tidak menghabiskan seluruh tenaga server dan mematikan aplikasi lain.',
+    codeSnippet: 'limits: cpu: 500m'
+  },
+  {
+    id: 'BE-148',
+    category: 'Dockerize',
+    title: 'Docker Build Cache',
+    description: 'Memori pembangunan cepat.',
+    fullTheory: 'Docker mengingat perintah lama saat build. Jika kode tidak berubah, proses build akan selesai secepat kilat.',
+    codeSnippet: 'Using cache layer'
+  },
+  {
+    id: 'BE-149',
+    category: 'Dockerize',
+    title: 'Docker Prune cleanup',
+    description: 'Sapu bersih sampah.',
+    fullTheory: 'Perintah sakti untuk menghapus semua kontainer mati dan image sampah yang memenuhi memori harddisk server.',
+    codeSnippet: 'docker system prune'
+  },
+  {
+    id: 'BE-150',
+    category: 'Dockerize',
+    title: 'Rootless Containers',
+    description: 'Keamanan tanpa admin.',
+    fullTheory: 'Menjalankan semua kontainer tanpa izin "Admin" (Root) agar jika aplikasi diretas, peretas tidak bisa kuasai seluruh server.',
+    codeSnippet: 'User-level Isolation'
   }
 ];
 
-// Generate simple stubs for missing numbers (46-99) to ensure 100 items exist for display
-for (let i = 46; i <= 99; i++) {
-  const idStr = i.toString().padStart(3, '0');
-  beTheoryData.push({
-    id: `BE-${idStr}`,
-    category: i % 2 === 0 ? 'Advanced Mastery' : 'Specialized Tools',
-    title: `Deep Backend Mastery #${i}`,
-    description: `Pembelajaran mendalam mengenai topik teknik backend nomor ${i}.`,
-    fullTheory: `Ini adalah bagian dari 100 materi Backend Mastery. Topik ${i} membahas tentang optimalisasi sistem, manajemen resource, dan implementasi arsitektur tingkat lanjut yang digunakan di perusahaan teknologi besar. Fokus utama adalah pada skalabilitas, keamanan, dan efisiensi kode di sisi server.`,
-    codeSnippet: `// Implementation snippet for mastery topic ${i}\nvoid handleComplexLogic() {\n  // Logic for topic ${i}\n  executeAdvancedAlgorithm();\n}`
-  });
-}
+beTheoryData.sort((a, b) => a.id.localeCompare(b.id));

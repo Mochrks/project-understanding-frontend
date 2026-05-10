@@ -24,12 +24,23 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "#111111",
+          foreground: "#ffffff",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "#f5f5f5",
+          foreground: "#111111",
+        },
+        nike: {
+          black: "#111111",
+          white: "#ffffff",
+          gray: "#f5f5f5",
+          charcoal: "#39393b",
+          ash: "#4b4b4d",
+          mute: "#707072",
+          stone: "#9e9ea0",
+          hairline: "#cacacb",
+          sale: "#d30005",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
@@ -59,7 +70,12 @@ module.exports = {
           5: "hsl(var(--chart-5))",
         },
       },
+      fontFamily: {
+        display: ["Bebas Neue", "sans-serif"],
+        sans: ["Inter", "sans-serif"],
+      },
       borderRadius: {
+        nike: "30px",
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
